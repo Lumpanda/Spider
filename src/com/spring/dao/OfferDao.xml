@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+    private int offerId;
+    private String company;
+    private String job;
+    private String area;
+    private String salary;
+    private String score;
+    private String createTime;
+    private String tip;
+    private String looked;
+-->
+
+<mapper namespace="com.spring.dao.OfferDao">
+
+    <resultMap id="Base_Result_Map" type="com.spring.model.Offer">
+        <result column="offerId"    property="offerId"  jdbcType="INTEGER" />
+        <result column="company"    property="company"  jdbcType="VARCHAR" />
+        <result column="job"        property="job"      jdbcType="VARCHAR" />
+        <result column="area"       property="area"      jdbcType="VARCHAR" />
+        <result column="salary"     property="salary"   jdbcType="VARCHAR" />
+        <result column="score"      property="score"    jdbcType="INTEGER" />
+        <result column="createTime" property="createTime"   jdbcType="VARCHAR" />
+        <result column="tip"        property="tip"      jdbcType="VARCHAR" />
+        <result column="looked"     property="looked"   jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        offerId, company, job, area , salary, score, createTime, tip, looked
+    </sql>
+
+    <select id="getOfferById" resultMap="Base_Result_Map" parameterType="int">
+        SELECT * FROM offer WHERE offerId=#{offerId}
+    </select>
+
+    <select id="getOfferByCompany" parameterType="String">
+        SELECT * FROM offer WHERE company=#{company}
+    </select>
+
+    <insert id="addOffer" parameterType="com.spring.model.Offer">
+        INSERT INTO offer(offerId,company,job,area,salary,score,createTime,tip,looked) VALUES(#{offerId},#{company},#{job},#{area},#{salary},#{score},#{createTime},#{tip},#{looked})
+    </insert>
+
+    <update id="updateOffer" parameterType="com.spring.model.Offer">
+        UPDATE offer SET company=#{company} WHERE offerID=#{offerId}
+    </update>
+
+    <delete id="deleteOffer" parameterType="int">
+        DELETE FROM offer WHERE offerId=#{offerId}
+    </delete>
+
+</mapper>

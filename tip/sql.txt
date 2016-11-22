@@ -1,0 +1,16 @@
+
+create database offershow;
+
+create table offer(
+  id INT(5) NOT NULL AUTO_INCREMENT,
+  offerId INT(5),
+  company VARCHAR(20) NOT NULL,
+  job VARCHAR(20),
+  area VARCHAR(20),
+  salary VARCHAR(20) NOT NULL,
+  score VARCHAR(20),
+  createTime VARCHAR(20),
+  tip VARCHAR(100),
+  looked VARCHAR(20),
+  PRIMARY KEY(id)
+);

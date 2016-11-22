@@ -1,0 +1,20 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="spider">
+    <output-path>$PROJECT_DIR$/out/artifacts/spider</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="SpiderOfferShow/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="SpiderOfferShow" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Spring-4.3.4.RELEASE" />
+          <element id="library" level="project" name="Spring MVC-4.3.4.RELEASE" />
+          <element id="library" level="project" name="mybatis-3.4.1" />
+          <element id="library" level="project" name="webmagic" />
+          <element id="library" level="project" name="tomcat-websocket" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
