@@ -1,16 +1,89 @@
 
 create database offershow;
 
-create table offer(
+CREATE TABLE offer(
   id INT(5) NOT NULL AUTO_INCREMENT,
   offerId INT(5),
-  company VARCHAR(20) NOT NULL,
-  job VARCHAR(20),
-  area VARCHAR(20),
-  salary VARCHAR(20) NOT NULL,
-  score VARCHAR(20),
-  createTime VARCHAR(20),
-  tip VARCHAR(100),
-  looked VARCHAR(20),
-  PRIMARY KEY(id)
+  company TEXT NOT NULL,
+  job TEXT NOT NULL,
+  area TEXT,
+  salary TEXT NOT NULL,
+  score INT(5),
+  createTime TEXT,
+  tip TEXT,
+  looked INT(5),
+  PRIMARY KEY (id),
+  UNIQUE KEY realId (offerId)
 );
+
+CREATE TABLE `offer` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `offerId` int(5) DEFAULT NULL,
+  `company` text CHARACTER SET utf8mb4 NOT NULL,
+  `job` text CHARACTER SET utf8mb4 NOT NULL,
+  `area` text CHARACTER SET utf8mb4,
+  `salary` text CHARACTER SET utf8mb4 NOT NULL,
+  `score` int(5) DEFAULT NULL,
+  `createTime` text CHARACTER SET utf8mb4,
+  `tip` text CHARACTER SET utf8mb4,
+  `looked` int(5) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `realId` (`offerId`)
+) ENGINE=InnoDB AUTO_INCREMENT=2841 DEFAULT CHARSET=utf8;
+
+去重
+DELETE
+FROM
+	offer
+WHERE
+	offerId IN (
+		SELECT aaid from
+		(
+			SELECT
+				offerId as aaid
+			FROM
+				offer
+			GROUP BY
+				offerId
+			HAVING
+				count(offerId)>1
+		) as a
+	)
+AND id NOT IN (
+		SELECT bbid from
+		(
+			SELECT
+				max(id) as bbid
+			FROM
+				offer
+			GROUP BY
+				offerId
+			HAVING
+				count(offerId)>1
+		) as b
+);
+
+增加唯一索引
+    CREATE UNIQUE INDEX realId ON offer(offerID);
+配合
+    <insert id="addOffer" parameterType="com.spring.model.Offer">
+        INSERT INTO offer(offerId,company,job,area,salary,score,createTime,tip,looked)
+        VALUES(#{offerId},#{company},#{job},#{area},#{salary},#{score},#{createTime},#{tip},#{looked})
+        ON DUPLICATE KEY UPDATE score=#{score},looked=#{looked}
+    </insert>
+
+
+CREATE TABLE `offer` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `offerId` int(5) DEFAULT NULL,
+  `company` text CHARACTER SET utf8mb4 NOT NULL,
+  `job` text CHARACTER SET utf8mb4 NOT NULL,
+  `area` text CHARACTER SET utf8mb4,
+  `salary` text CHARACTER SET utf8mb4 NOT NULL,
+  `score` int(5) DEFAULT NULL,
+  `createTime` text CHARACTER SET utf8mb4,
+  `tip` text CHARACTER SET utf8mb4,
+  `looked` int(5) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `realId` (`offerId`)
+) ENGINE=InnoDB AUTO_INCREMENT=2841 DEFAULT CHARSET=utf8;

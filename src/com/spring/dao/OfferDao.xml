@@ -41,7 +41,9 @@
     </select>
 
     <insert id="addOffer" parameterType="com.spring.model.Offer">
-        INSERT INTO offer(offerId,company,job,area,salary,score,createTime,tip,looked) VALUES(#{offerId},#{company},#{job},#{area},#{salary},#{score},#{createTime},#{tip},#{looked})
+        INSERT INTO offer(offerId,company,job,area,salary,score,createTime,tip,looked)
+        VALUES(#{offerId},#{company},#{job},#{area},#{salary},#{score},#{createTime},#{tip},#{looked})
+        ON DUPLICATE KEY UPDATE score=#{score},looked=#{looked}
     </insert>
 
     <update id="updateOffer" parameterType="com.spring.model.Offer">
