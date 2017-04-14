@@ -43,7 +43,7 @@ public class startSpider {
                 //.addPipeline( new ConsolePipeline() )
                 .addPipeline( showOfferPipeline )
                 //.addUrl( "http://www.offershow.online:8000/sort/1" )
-                .addUrl( "http://www.offershow.online:8000/sort/2" )
+                .addUrl( "http://www.ioffershow.com/sort/2" )
                 //.addUrl( "http://www.offershow.online:8000/sort/3" )
                 .thread( 5 )
                 .setExitWhenComplete( true )

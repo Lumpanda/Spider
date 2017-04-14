@@ -18,11 +18,11 @@ public class showOfferPageProcessor implements PageProcessor {
     //重试次数3，抓取间隔100ms
     private Site site = Site.me().setRetryTimes(3).setSleepTime(200);
 
-    public static final String URL_GROUP_FULL = "http://www.offershow.online:8000/sort/\\w+";
+    public static final String URL_GROUP_FULL = "http://www.ioffershow.com/sort/\\w+";
     public static final String URL_GROUP = "/sort/\\w+";
-    public static final String URL_DETAIL_FULL = "http://www.offershow.online:8000/offerdetail/\\d+";
+    public static final String URL_DETAIL_FULL = "http://www.ioffershow.com/offerdetail/\\d+";
     public static final String URL_DETAIL = "/offerdetail/\\d+";
-    public static final String URL_PRE = "http://www.offershow.online:8000";
+    public static final String URL_PRE = "http://www.ioffershow.com";
 
     private static int a = 0;
 
@@ -46,14 +46,14 @@ public class showOfferPageProcessor implements PageProcessor {
 
             String url = page.getUrl().toString();
             page.putField("offerId", Integer.parseInt( url.substring( url.lastIndexOf('l')+2, url.length() ) ) );
-            page.putField("company", page.getHtml().xpath(      "//div[@class='ui-block-b'][2]/p/a/text()").toString() );
-            page.putField("job", page.getHtml().xpath(          "//div[@class='ui-block-b'][4]/p/a/text()").toString() );
-            page.putField("area", page.getHtml().xpath(         "//div[@class='ui-block-b'][6]/p/a/text()").toString() );
-            page.putField("salary", page.getHtml().xpath(       "//div[@class='ui-block-b'][8]/p/text()").toString() );
-            String score = page.getHtml().xpath(        "//div[@class='ui-block-b'][10]/p/a/text()").toString();
+            page.putField("company", page.getHtml().xpath(      "//div[@class='ui-block-b'][4]/p/a/text()").toString() );
+            page.putField("job", page.getHtml().xpath(          "//div[@class='ui-block-b'][6]/p/a/text()").toString() );
+            page.putField("area", page.getHtml().xpath(         "//div[@class='ui-block-b'][8]/p/a/text()").toString() );
+            page.putField("salary", page.getHtml().xpath(       "//div[@class='ui-block-b'][10]/p/text()").toString() );
+            String score = page.getHtml().xpath(                "//div[@class='ui-block-b'][12]/p/a/text()").toString();
             page.putField("score", Integer.parseInt( score ) );
-            page.putField("createTime", page.getHtml().xpath(   "//div[@class='ui-block-b'][12]/p/text()").toString() );
-            page.putField("tip", page.getHtml().xpath(          "//div[@class='ui-block-b'][14]/p/text()").toString() );
+            page.putField("createTime", page.getHtml().xpath(   "//div[@class='ui-block-b'][14]/p/text()").toString() );
+            page.putField("tip", page.getHtml().xpath(          "//div[@class='ui-block-b'][16]/p/text()").toString() );
             String looked = page.getHtml().xpath(       "//div[@data-role='header']/h1/text()").toString();
             page.putField("looked", Integer.parseInt( looked.substring( 7, looked.length()-1 ) ) );
         }

@@ -1,6 +1,27 @@
 
 create database offershow;
 
+use offershow;
+
+CREATE TABLE `offer` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `offerId` int(5) DEFAULT NULL,
+  `company` text CHARACTER SET utf8mb4 NOT NULL,
+  `job` text CHARACTER SET utf8mb4 NOT NULL,
+  `area` text CHARACTER SET utf8mb4,
+  `salary` text CHARACTER SET utf8mb4 NOT NULL,
+  `score` int(5) DEFAULT NULL,
+  `createTime` text CHARACTER SET utf8mb4,
+  `tip` text CHARACTER SET utf8mb4,
+  `looked` int(5) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `realId` (`offerId`)
+) ENGINE=InnoDB AUTO_INCREMENT=2841 DEFAULT CHARSET=utf8;
+
+
+
+create database offershow;
+
 CREATE TABLE offer(
   id INT(5) NOT NULL AUTO_INCREMENT,
   offerId INT(5),
