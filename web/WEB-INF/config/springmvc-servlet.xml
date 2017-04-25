@@ -17,6 +17,7 @@
 
     <!--单独处理静态资源-->
     <mvc:resources mapping="/js/*.js"   location="/WEB-INF/jsp/"/>
+    <mvc:resources mapping="/css/*.css" location="/WEB-INF/jsp/"/>
     <mvc:resources mapping="/*.html"    location="/WEB-INF/jsp/"/>
 
     <!--视图解释器-->

@@ -27,5 +27,6 @@
     <orderEntry type="library" name="mybatis-3.4.1" level="project" />
     <orderEntry type="library" name="webmagic" level="project" />
     <orderEntry type="library" name="tomcat-websocket" level="project" />
+    <orderEntry type="library" name="common" level="project" />
   </component>
 </module>

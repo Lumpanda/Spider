@@ -17,6 +17,8 @@ import com.spring.service.OfferService;
 
 import javax.annotation.Resource;
 
+import net.sf.json.JSONObject;
+
 /**
  * Created by Lumpanda on 2016/11/13.
  */
@@ -53,11 +55,23 @@ public class showOfferPipeline implements Pipeline {
             offer.setTip( resultItems.get("tip") );
             offer.setLooked( resultItems.get("looked") );
 
+            JSONObject offerJson = new JSONObject();
+
+            offerJson.put( "offerId"    , resultItems.get("offerId") );
+            offerJson.put( "company"    , resultItems.get("company") );
+            offerJson.put( "job"        , resultItems.get("job") );
+            offerJson.put( "area"       , resultItems.get("area") );
+            offerJson.put( "salary"     , resultItems.get("salary") );
+            offerJson.put( "score"      , resultItems.get("score") );
+            offerJson.put( "createTime" , resultItems.get("createTime") );
+            offerJson.put( "tip"        , resultItems.get("tip") );
+            offerJson.put( "looked"     , resultItems.get("looked") );
+
 
             try {
                 offerService.addOffer(offer);
                 for( WebSocketController item : WebSocketController.getWebSocketSet() ){
-                    item.sendMessage( offer.toString() );
+                    item.sendMessage( offerJson.toString() );
                 }
             }
             catch( Exception e ){

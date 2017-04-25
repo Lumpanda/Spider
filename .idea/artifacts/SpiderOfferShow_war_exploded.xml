@@ -12,6 +12,7 @@
           <element id="library" level="project" name="mybatis-3.4.1" />
           <element id="library" level="project" name="webmagic" />
           <element id="library" level="project" name="tomcat-websocket" />
+          <element id="library" level="project" name="common" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="SpiderOfferShow/web/Web" />

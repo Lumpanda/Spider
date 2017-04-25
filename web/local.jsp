@@ -5,6 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+<link rel="stylesheet" href="/spider/css/main.css" type="text/css" />
 <script type="text/javascript" src="/spider/js/jquery.js"></script>
 <script type="text/javascript">
 
@@ -31,7 +32,21 @@
     }
 
     function showMessage( message ){
-        document.getElementById("offerMessage").innerHTML += message + '<br/>';
+
+        var data = JSON.parse(message);
+        str =   " <div id=\"offerMessage\" class=\"offerMessage\"> " +
+                " <div id=\"offerId\"> "    + data.offerId.toString()       + " </div> "+
+                " <div id=\"company\"> "    + data.company.toString()        + " </div> "+
+                " <div id=\"job\"> "        + data.job.toString()            + " </div>"+
+                " <div id=\"area\"> "       + data.area.toString()           + " </div>"+
+                " <div id=\"salary\"> "     + data.salary.toString()         + " </div>"+
+                " <div id=\"score\"> "      + data.score .toString()         + " </div>"+
+                " <div id=\"createTime\"> " + data.createTime.toString()     + " </div>"+
+                " <div id=\"tip\"> "        + data.tip.toString()            + " </div>"+
+                " <div id=\"looked\"> "     + data.looked.toString()         + " </div>"+
+                " </div>"
+
+        document.getElementById("MessageBox").innerHTML += str ;
     }
 
     //连接成功
@@ -83,8 +98,19 @@
     <button onclick="sendMessage();">Send</button>
     <button onclick="closeWebSocket();">Close</button>
 </div>
-<div id="offerMessage" class="offerMessage">
 
+<div id="MessageBox" class="MessageBox">
+    <div id="offerMessage" class="offerMessage">
+        <div id="offerId">offerId</div>
+        <div id="company">company</div>
+        <div id="job">job</div>
+        <div id="area">area</div>
+        <div id="salary">salary</div>
+        <div id="score">score</div>
+        <div id="createTime">createTime</div>
+        <div id="tip">tip</div>
+        <div id="looked">looked</div>
+    </div>
 </div>
 
 </body>
