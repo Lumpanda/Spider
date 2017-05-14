@@ -33,8 +33,9 @@
 
   function showMessage( message ){
 
-    var data = JSON.parse(message);
-    str =   " <div id=\"offerMessage\" class=\"offerMessage\"> " +
+    if( isJson ){
+        var data = JSON.parse(message);
+        str =   " <div id=\"offerMessage\" class=\"offerMessage\"> " +
             " <div id=\"offerId\"> "    + data.offerId.toString()       + " </div> "+
             " <div id=\"company\"> "    + data.company.toString()        + " </div> "+
             " <div id=\"job\"> "        + data.job.toString()            + " </div>"+
@@ -46,7 +47,14 @@
             " <div id=\"looked\"> "     + data.looked.toString()         + " </div>"+
             " </div>"
 
-    document.getElementById("MessageBox").innerHTML += str ;
+        document.getElementById("MessageBox").innerHTML += str ;
+    }
+    else{
+        str = message + "<\/br>";
+        document.getElementById("chatBox").innerHTML += str ;
+    }
+
+
   }
 
   //连接成功
@@ -81,6 +89,19 @@
     websocket.close();
   }
 
+  //判断是否为JSON格式
+  var isJson = function(str){
+      var tempjson = null;
+      try{
+          tempjson = JSON.parse(str);
+          return true;
+      }
+      catch(error){
+          return false;
+      }
+  }
+
+
 </script>
 
 <head>
@@ -97,6 +118,10 @@
   <input id="inputMessage" type="text" />
   <button onclick="sendMessage();">Send</button>
   <button onclick="closeWebSocket();">Close</button>
+</div>
+
+<div id="chatBox" class="chatBox">
+
 </div>
 
 <div id="MessageBox" class="MessageBox">
