@@ -33,7 +33,7 @@
 
   function showMessage( message ){
 
-    if( isJson ){
+    if( isJson(message) ){
         var data = JSON.parse(message);
         str =   " <div id=\"offerMessage\" class=\"offerMessage\"> " +
             " <div id=\"offerId\"> "    + data.offerId.toString()       + " </div> "+
@@ -53,7 +53,6 @@
         str = message + "<\/br>";
         document.getElementById("chatBox").innerHTML += str ;
     }
-
 
   }
 
