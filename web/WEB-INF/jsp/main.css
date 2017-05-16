@@ -1,0 +1,65 @@
+
+.MessageBox{
+
+}
+
+.offerMessage{
+    float: left;
+    width:1500px;
+    margin: 0px 0px 8px 0px;
+/*    border: 1px solid; */
+}
+
+#offerId{
+    float: left;
+    width: 50px;
+    margin: 0px 0px 0px 10px;
+}
+#company{
+    float: left;
+    width: 150px;
+    margin: 0px 0px 0px 10px;
+
+}
+#job{
+    float: left;
+    width: 150px;
+    margin: 0px 0px 0px 10px;
+
+}
+#area{
+    float: left;
+    width: 50px;
+    margin: 0px 0px 0px 10px;
+
+}
+#salary{
+    float: left;
+    width: 150px;
+    margin: 0px 0px 0px 10px;
+
+}
+#score{
+    float: left;
+    width: 50px;
+    margin: 0px 0px 0px 10px;
+
+}
+#createTime{
+    float: left;
+    width: 100px;
+    margin: 0px 0px 0px 10px;
+
+}
+#tip{
+    float: left;
+    width: 600px;
+    margin: 0px 0px 0px 10px;
+
+}
+#looked{
+    float: left;
+    width: 100px;
+    margin: 0px 0px 0px 10px;
+
+}

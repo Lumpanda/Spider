@@ -3,19 +3,19 @@
 <html>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<link rel="stylesheet" href="/spider/css/main.css" type="text/css" />
+<link rel="stylesheet" href="/spider/css/main.css" type="text/css"/>
 <script type="text/javascript" src="/spider/js/jquery.js"></script>
 <script type="text/javascript">
 
-    function start(){
+    function start() {
         $.ajax({
-            type:'POST',
-            url:'startSpider',
+            type: 'POST',
+            url: 'startSpider',
             data: "github",
-            success:function( a ){
-                alert( a );
+            success: function (a) {
+                alert(a);
             }
 
         });
@@ -24,84 +24,84 @@
     var websocket = null;
 
     //判断当前浏览器是否支持websocket
-    if( 'WebSocket' in window ){
-        websocket = new WebSocket( "ws://localhost/spider/websocket" );
+    if ('WebSocket' in window) {
+        websocket = new WebSocket("ws://localhost/spider/websocket");
     }
     else {
         alert("No support websocket");
     }
 
-    function showMessage( message ){
+    function showMessage(message) {
 
-        if( isJson(message) ){
+        if (isJson(message)) {
             var data = JSON.parse(message);
-            str =   " <div id=\"offerMessage\" class=\"offerMessage\"> " +
-                " <div id=\"offerId\"> "    + data.offerId.toString()       + " </div> "+
-                " <div id=\"company\"> "    + data.company.toString()        + " </div> "+
-                " <div id=\"job\"> "        + data.job.toString()            + " </div>"+
-                " <div id=\"area\"> "       + data.area.toString()           + " </div>"+
-                " <div id=\"salary\"> "     + data.salary.toString()         + " </div>"+
-                " <div id=\"score\"> "      + data.score .toString()         + " </div>"+
-                " <div id=\"createTime\"> " + data.createTime.toString()     + " </div>"+
-                " <div id=\"tip\"> "        + data.tip.toString()            + " </div>"+
-                " <div id=\"looked\"> "     + data.looked.toString()         + " </div>"+
+            str = " <div id=\"offerMessage\" class=\"offerMessage\"> " +
+                " <div id=\"offerId\"> " + data.offerId.toString() + " </div> " +
+                " <div id=\"company\"> " + data.company.toString() + " </div> " +
+                " <div id=\"job\"> " + data.job.toString() + " </div>" +
+                " <div id=\"area\"> " + data.area.toString() + " </div>" +
+                " <div id=\"salary\"> " + data.salary.toString() + " </div>" +
+                " <div id=\"score\"> " + data.score.toString() + " </div>" +
+                " <div id=\"createTime\"> " + data.createTime.toString() + " </div>" +
+                " <div id=\"tip\"> " + data.tip.toString() + " </div>" +
+                " <div id=\"looked\"> " + data.looked.toString() + " </div>" +
                 " </div>"
 
-            document.getElementById("MessageBox").innerHTML += str ;
+            document.getElementById("MessageBox").innerHTML += str;
         }
-        else{
+        else {
             str = message + "<\/br>";
-            document.getElementById("chatBox").innerHTML += str ;
+            document.getElementById("chatBox").innerHTML += str;
         }
 
     }
 
     //连接成功
-    websocket.onopen = function(){
+    websocket.onopen = function () {
         showMessage("open");
     }
     //连接关闭
-    websocket.onclose = function(){
+    websocket.onclose = function () {
         showMessage("close");
     }
     //发生错误
-    websocket.onerror = function(){
+    websocket.onerror = function () {
         showMessage("error");
     }
     //收到消息
-    websocket.onmessage = function(event){
-        showMessage( event.data );
+    websocket.onmessage = function (event) {
+        showMessage(event.data);
     }
     //窗口关闭时，断开连接
-    window.onbeforeunload = function(){
+    window.onbeforeunload = function () {
         websocket.close();
     }
 
     //发送消息
-    function sendMessage(){
+    function sendMessage() {
         var message = document.getElementById("inputMessage").value;
-        websocket.send( message );
+        websocket.send(message);
     }
 
     //关闭websocket
-    function closeWebSocket(){
+    function closeWebSocket() {
         websocket.close();
     }
 
     //判断是否为JSON格式
-    var isJson = function(str){
+    var isJson = function (str) {
         var tempjson = null;
-        try{
+        try {
             tempJson = JSON.parse(str);
             tempKey = 'offerId';
-            for(var indexKey in tempJson){
-                if(indexKey == tempKey){
+            for (var indexKey in tempJson) {
+                if (indexKey == tempKey) {
                     return true;
                 }
             }
             return false;
         }
-        catch(error){
+        catch (error) {
             return false;
         }
     }
@@ -119,7 +119,7 @@
 </div>
 
 <div class="control">
-    <input id="inputMessage" type="text" />
+    <input id="inputMessage" type="text"/>
     <button onclick="sendMessage();">Send</button>
     <button onclick="closeWebSocket();">Close</button>
 </div>
