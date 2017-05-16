@@ -93,7 +93,12 @@
       var tempjson = null;
       try{
           tempjson = JSON.parse(str);
-          return true;
+          for(var tempKey in tempjson){
+              if(tempKey == offerId){
+                  return true;
+              }
+          }
+          return false;
       }
       catch(error){
           return false;
