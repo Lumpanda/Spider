@@ -92,9 +92,10 @@
     var isJson = function(str){
         var tempjson = null;
         try{
-            tempjson = JSON.parse(str);
-            for(var tempKey in tempjson){
-                if(tempKey == offerId){
+            tempJson = JSON.parse(str);
+            tempKey = 'offerId';
+            for(var indexKey in tempJson){
+                if(indexKey == tempKey){
                     return true;
                 }
             }
