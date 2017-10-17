@@ -1,5 +1,4 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -9,51 +8,16 @@
 <script type="text/javascript" src="/spider/js/jquery.js"></script>
 <script type="text/javascript">
 
-    function start() {
-        $.ajax({
-            type: 'POST',
-            url: 'startSpider',
-            data: "github",
-            success: function (a) {
-                alert(a);
-            }
-
-        });
-    }
-
     var websocket = null;
+    var host = window.location.host;
 
     //判断当前浏览器是否支持websocket
     if ('WebSocket' in window) {
-        websocket = new WebSocket("ws://localhost/spider/websocket");
+        // 建立Websocket连接
+        websocket = new WebSocket("ws://" + host + "/spider/websocket");
     }
     else {
         alert("No support websocket");
-    }
-
-    function showMessage(message) {
-
-        if (isJson(message)) {
-            var data = JSON.parse(message);
-            str = " <div id=\"offerMessage\" class=\"offerMessage\"> " +
-                " <div id=\"offerId\"> " + data.offerId.toString() + " </div> " +
-                " <div id=\"company\"> " + data.company.toString() + " </div> " +
-                " <div id=\"job\"> " + data.job.toString() + " </div>" +
-                " <div id=\"area\"> " + data.area.toString() + " </div>" +
-                " <div id=\"salary\"> " + data.salary.toString() + " </div>" +
-                " <div id=\"score\"> " + data.score.toString() + " </div>" +
-                " <div id=\"createTime\"> " + data.createTime.toString() + " </div>" +
-                " <div id=\"tip\"> " + data.tip.toString() + " </div>" +
-                " <div id=\"looked\"> " + data.looked.toString() + " </div>" +
-                " </div>"
-
-            document.getElementById("MessageBox").innerHTML += str;
-        }
-        else {
-            str = message + "<\/br>";
-            document.getElementById("chatBox").innerHTML += str;
-        }
-
     }
 
     //连接成功
@@ -88,6 +52,44 @@
         websocket.close();
     }
 
+    // 页面中显示信息
+    function showMessage(message) {
+        if (isJson(message)) {
+            var data = JSON.parse(message);
+
+            str =   "<div id=\"offerMessage\" class=\"offerMessage\">" +
+                    "<div id=\"offerId\">"      + data.offerId.toString()       + "</div>" + 
+                    "<div id=\"company\">"      + data.company.toString()       + "</div>" +
+                    "<div id=\"job\">"          + data.job.toString()           + "</div>" +
+                    "<div id=\"area\">"         + data.area.toString()          + "</div>" +
+                    "<div id=\"salary\">"       + data.salary.toString()        + "</div>" +
+                    "<div id=\"score\">"        + data.score.toString()         + "</div>" +
+                    "<div id=\"createTime\">"   + data.createTime.toString()    + "</div>" +
+                    "<div id=\"tip\">"          + data.tip.toString()           + "</div>" +
+                    "<div id=\"looked\">"       + data.looked.toString()        + "</div>" +
+                    "</div>"
+
+            document.getElementById("MessageBox").innerHTML += str;
+            window.location = "index.html#bottomDiv";
+        }
+        else {
+            str = message + "<\/br>";
+            document.getElementById("chatBox").innerHTML += str;
+        }
+    }
+
+    // 开启爬虫
+    function start() {
+        $.ajax({
+            type: 'POST',
+            url: 'startSpider',
+            data: "github",
+            success: function (a) {
+                alert(a);
+            }
+        });
+    }
+
     //判断是否为JSON格式
     var isJson = function (str) {
         var tempjson = null;
@@ -105,6 +107,7 @@
             return false;
         }
     }
+
 
 </script>
 
@@ -125,21 +128,23 @@
 </div>
 
 <div id="chatBox" class="chatBox">
-
 </div>
 
 <div id="MessageBox" class="MessageBox">
     <div id="offerMessage" class="offerMessage">
-        <div id="offerId">offerId</div>
-        <div id="company">company</div>
-        <div id="job">job</div>
-        <div id="area">area</div>
-        <div id="salary">salary</div>
-        <div id="score">score</div>
-        <div id="createTime">createTime</div>
-        <div id="tip">tip</div>
-        <div id="looked">looked</div>
+        <div id="offerId">      offerId     </div>
+        <div id="company">      company     </div>
+        <div id="job">          job         </div>
+        <div id="area">         area        </div>
+        <div id="salary">       salary      </div>
+        <div id="score">        score       </div>
+        <div id="createTime">   createTime  </div>
+        <div id="tip">          tip         </div>
+        <div id="looked">       looked      </div>
     </div>
+</div>
+
+<div id="bottomDiv" class="bottomDiv">
 </div>
 
 </body>

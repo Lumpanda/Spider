@@ -17,15 +17,15 @@
 <mapper namespace="com.spring.dao.OfferDao">
 
     <resultMap id="Base_Result_Map" type="com.spring.model.Offer">
-        <result column="offerId"    property="offerId"  jdbcType="INTEGER" />
-        <result column="company"    property="company"  jdbcType="VARCHAR" />
-        <result column="job"        property="job"      jdbcType="VARCHAR" />
-        <result column="area"       property="area"      jdbcType="VARCHAR" />
-        <result column="salary"     property="salary"   jdbcType="VARCHAR" />
-        <result column="score"      property="score"    jdbcType="INTEGER" />
+        <result column="offerId"    property="offerId"      jdbcType="INTEGER" />
+        <result column="company"    property="company"      jdbcType="VARCHAR" />
+        <result column="job"        property="job"          jdbcType="VARCHAR" />
+        <result column="area"       property="area"         jdbcType="VARCHAR" />
+        <result column="salary"     property="salary"       jdbcType="VARCHAR" />
+        <result column="score"      property="score"        jdbcType="INTEGER" />
         <result column="createTime" property="createTime"   jdbcType="VARCHAR" />
-        <result column="tip"        property="tip"      jdbcType="VARCHAR" />
-        <result column="looked"     property="looked"   jdbcType="INTEGER" />
+        <result column="tip"        property="tip"          jdbcType="VARCHAR" />
+        <result column="looked"     property="looked"       jdbcType="INTEGER" />
     </resultMap>
 
     <sql id="Base_Column_List">

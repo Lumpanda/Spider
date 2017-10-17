@@ -30,8 +30,6 @@ public class WebSocketController{
         WebSocketController.onlineCount--;
     }
 
-
-
     //存放每个客户端对应的WebSocketController对象。
     //若要1对多，可用Map存放
     private static CopyOnWriteArraySet<WebSocketController> webSocketSet = new CopyOnWriteArraySet<WebSocketController>();
@@ -79,7 +77,7 @@ public class WebSocketController{
     * @param session 可选参数
     * */
     @OnMessage
-    public void onMessage( String message, Session session ){
+    public synchronized void onMessage( String message, Session session ){
 
         System.out.println( "收到客户端发来的消息： " + message );
 
@@ -97,7 +95,6 @@ public class WebSocketController{
 
         }
 
-
     }
 
     /*
@@ -107,8 +104,10 @@ public class WebSocketController{
     * */
     @OnError
     public void onError( Session session, Throwable error ){
+
         System.out.println("发生错误");
         error.printStackTrace();
+
     }
 
     /*
@@ -116,11 +115,10 @@ public class WebSocketController{
     * @param message
     * @throws IOException
     * */
-    public void sendMessage( String message ) throws IOException{
+    public synchronized void sendMessage( String message ) throws IOException{
 
         System.out.println("发送消息："+message);
         this.session.getBasicRemote().sendText( message );
-
 
     }
 

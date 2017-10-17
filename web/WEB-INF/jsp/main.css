@@ -1,6 +1,6 @@
 
 .MessageBox{
-
+    overflow: hidden;
 }
 
 .offerMessage{
@@ -61,5 +61,10 @@
     float: left;
     width: 100px;
     margin: 0px 0px 0px 10px;
+}
 
+#bottomDiv{
+    float: left;
+    width:10px;
+    height:10px;
 }

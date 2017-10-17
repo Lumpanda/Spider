@@ -23,15 +23,15 @@ public class startSpider {
 
     @Autowired
     private showOfferPageProcessor showOfferProcessor;
-
     @Autowired
     private showOfferPipeline showOfferPipeline;
 
+    // 打印欢迎页面
     public startSpider(){
-        System.out.println("-------------------------------------");
-        System.out.println("| Ready to spide showoffer          |");
-        System.out.println("| http://localhost/spider/          |");
-        System.out.println("-------------------------------------");
+        System.out.println("--------------------------------------");
+        System.out.println("| Ready to spide showoffer           |");
+        System.out.println("| http://localhost/spider/local.html |");
+        System.out.println("--------------------------------------");
     }
 
     @RequestMapping( value = "/startSpider", method = { RequestMethod.GET, RequestMethod.POST })
@@ -39,16 +39,22 @@ public class startSpider {
         System.out.println("-------------------------------------");
         System.out.println("| Begin to spide showoffer          |");
         System.out.println("-------------------------------------");
-        Spider.create( showOfferProcessor )
-                //.addPipeline( new ConsolePipeline() )
-                .addPipeline( showOfferPipeline )
-                //.addUrl( "http://www.offershow.online:8000/sort/1" )
-                .addUrl( "http://www.ioffershow.com/sort/2" )
-                //.addUrl( "http://www.offershow.online:8000/sort/3" )
-                .thread( 5 )
-                .setExitWhenComplete( true )
-                .run();
-
+        // 创建Spider
+        Spider spiderOne = Spider.create( showOfferProcessor );
+        // 增加Pipeline保存
+        spiderOne.addPipeline( showOfferPipeline );
+        // 配置线程数量
+        spiderOne.thread( 5 );
+        // 完成后退出
+        spiderOne.setExitWhenComplete( true );
+        // 手动制定爬虫
+        for( int i = 1; i<100; i++ ){
+            spiderOne.addUrl( "http://www.ioffershow.com/offerdetail/" + i );
+        }
+        // 入口爬虫
+        // spiderOne.addUrl( "http://www.ioffershow.com/sort/2" );
+        // 开启爬虫
+        spiderOne.run();
         return "started";
     }
 
